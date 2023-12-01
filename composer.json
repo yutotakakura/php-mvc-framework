@@ -2,7 +2,7 @@
     "name": "yutotakakura/php-mvc-framework",
     "autoload": {
         "psr-4": {
-            "App\\": "./"
+            "app\\": "./"
         }
     },
     "require": {}
