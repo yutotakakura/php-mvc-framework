@@ -27,10 +27,10 @@ class Router
      * Register GET request to routes
      *
      * @param string $path
-     * @param string $callback
+     * @param string|array $callback
      * @return void
      */
-    public function get(string $path, string $callback): void
+    public function get(string $path, string|array $callback): void
     {
         $this->routes['get'][$path] = $callback;
     }
@@ -67,6 +67,11 @@ class Router
             return $this->renderView($callback);
         }
 
+        if (is_array($callback)) {
+            $controller = new $callback[0];
+            $callback[0] = $controller;
+        }
+        
         return call_user_func($callback);
     }
 
@@ -76,7 +81,7 @@ class Router
      * @param string $view
      * @return string
      */
-    private function renderView(string $view): string
+    public function renderView(string $view): string
     {
         $latoutContent = $this->layoutContent();
         $viewContent = $this->renderOnlyView($view);
