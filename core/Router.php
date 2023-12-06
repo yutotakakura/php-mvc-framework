@@ -36,15 +36,15 @@ class Router
     }
 
     /**
-     * [WIP] Register POST request to routes
+     * Register POST request to routes
      *
      * @param string $path
      * @param Closure $callback
      * @return void
      */
-    public function post(string $path, Closure $callback): void
+    public function post(string $path, string|array $callback): void
     {
-        $this->routes['get'][$path] = $callback;
+        $this->routes['post'][$path] = $callback;
     }
 
     /**
@@ -72,7 +72,7 @@ class Router
             $callback[0] = $controller;
         }
         
-        return call_user_func($callback);
+        return call_user_func($callback, $this->request);
     }
 
     /**

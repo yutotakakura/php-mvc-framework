@@ -9,7 +9,7 @@ class Application
 
     public Router $router;
 
-    private Request $request;
+    public Request $request;
 
     private Responce $responce;
     
